@@ -6,36 +6,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Play Game</title>
     <script>
-    let ajreq2 = null;
+    let aj = null;
     
-function process() {
-  ajreq2 = new XMLHttpRequest();
-  userresponce = ""
-    if (document.getElementById("q1").checked) {
-        userresponce='rock';
-      } else if (document.getElementById("q2").checked) {
-        userresponce='paper';
-      } else if (document.getElementById("q3").checked) {
-        userresponce='scissor';
-      } 
-  ajreq2.onreadystatechange = function () {
-      if (ajreq2.readyState == 4) {
-        let obj =  JSON.parse(ajreq2.responseText);
+function process1() {
+  aj = new XMLHttpRequest();
+  userresponce='rock';
+
+    // if (document.getElementById("q1").checked) {
+    //     userresponce='rock';
+    //   } else if (document.getElementById("q2").checked) {
+    //     userresponce='paper';
+    //   } else if (document.getElementById("q3").checked) {
+    //     userresponce='scissor';
+    //   } 
+    
+  aj.onreadystatechange = function () {
+      if (aj.readyState == 4) {
+        let res =  JSON.parse(aj.responseText);
         let div = document.getElementById("title");
         div.innerHTML = "<br><br><h1 style='color:red;'>RESULT<h1>";
         div2 = document.getElementById("result");
-        result = "<center><h1 style='color:blue;'>User Choice : " + obj.userchoice + "</h1>"+ "<center><h1 style='color:blue;'>Computer Choice : " + obj.computerchoice + "</h1>";
-        result += "<center><h1 style='color:green;'>Winner : " + obj.winner + "</h1>";
+        result = "<center><h1 style='color:blue;'>User Choice : " + res.userchoice + "</h1>"+ "<center><h1 style='color:blue;'>Computer Choice : " + res.computerchoice + "</h1>";
+        result += "<center><h1 style='color:green;'>Winner : " + res.winner + "</h1>";
         result +="<a id='header-links' style='text-decoration: none;color: white;' href='{% url 'game' %}'><button type='button' class='btn' style='background-color:black;color:white;padding:15px;border-radius:15px;'  >Play Again</button></a><br><br>"
         div2.innerHTML = result;
       } 
     };
-    ajreq2.open(
+    aj.open(
       "GET",
       "/resultapi?userans="+userresponce,
       true
     );
-    ajreq2.send(null);
+    aj.send(null);
+}
+
+function process2() {
+  aj = new XMLHttpRequest();
+  userresponce='paper';
+
+    // if (document.getElementById("q1").checked) {
+    //     userresponce='rock';
+    //   } else if (document.getElementById("q2").checked) {
+    //     userresponce='paper';
+    //   } else if (document.getElementById("q3").checked) {
+    //     userresponce='scissor';
+    //   } 
+    
+  aj.onreadystatechange = function () {
+      if (aj.readyState == 4) {
+        let res =  JSON.parse(aj.responseText);
+        let div = document.getElementById("title");
+        div.innerHTML = "<br><br><h1 style='color:red;'>RESULT<h1>";
+        div2 = document.getElementById("result");
+        result = "<center><h1 style='color:blue;'>User Choice : " + res.userchoice + "</h1>"+ "<center><h1 style='color:blue;'>Computer Choice : " + res.computerchoice + "</h1>";
+        result += "<center><h1 style='color:green;'>Winner : " + res.winner + "</h1>";
+        result +="<a id='header-links' style='text-decoration: none;color: white;' href='{% url 'game' %}'><button type='button' class='btn' style='background-color:black;color:white;padding:15px;border-radius:15px;'  >Play Again</button></a><br><br>"
+        div2.innerHTML = result;
+      } 
+    };
+    aj.open(
+      "GET",
+      "/resultapi?userans="+userresponce,
+      true
+    );
+    aj.send(null);
+}
+function process3() {
+  aj = new XMLHttpRequest();
+  userresponce = "scissor"
+
+    // if (document.getElementById("q1").checked) {
+    //     userresponce='rock';
+    //   } else if (document.getElementById("q2").checked) {
+    //     userresponce='paper';
+    //   } else if (document.getElementById("q3").checked) {
+    //     userresponce='scissor';
+    //   } 
+    
+  aj.onreadystatechange = function () {
+      if (aj.readyState == 4) {
+        let res =  JSON.parse(aj.responseText);
+        let div = document.getElementById("title");
+        div.innerHTML = "<br><br><h1 style='color:red;'>RESULT<h1>";
+        div2 = document.getElementById("result");
+        result = "<center><h1 style='color:blue;'>User Choice : " + res.userchoice + "</h1>"+ "<center><h1 style='color:blue;'>Computer Choice : " + res.computerchoice + "</h1>";
+        result += "<center><h1 style='color:green;'>Winner : " + res.winner + "</h1>";
+        result +="<a id='header-links' style='text-decoration: none;color: white;' href='{% url 'game' %}'><button type='button' class='btn' style='background-color:black;color:white;padding:15px;border-radius:15px;'  >Play Again</button></a><br><br>"
+        div2.innerHTML = result;
+      } 
+    };
+    aj.open(
+      "GET",
+      "/resultapi?userans="+userresponce,
+      true
+    );
+    aj.send(null);
 }
 </script>
 </head>
@@ -50,19 +115,19 @@ function process() {
     <form method="GET" action="/calculateresult/" >
 
          <br><center>
-           <input type="radio" name=opt id=q1 value="rock">
-           <image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiR80vQu8RQodJabjS_DEuDSKjEGj8FOFamQ&usqp=CAU" style="height:200px;">
-           <input type="radio" name=opt id=q2 value="paper">
+           <!-- <input type="radio" name=opt id=q1 value="rock"> -->
+           <image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiR80vQu8RQodJabjS_DEuDSKjEGj8FOFamQ&usqp=CAU" style="height:200px;margin-right:30px;"   onclick=process1();>
+           <!-- <input type="radio" name=opt id=q2 value="paper"> -->
            <image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhcS_BMRzlI1yJM1y4bF-CKIOWlX3yVOp6hACU9c559b8uXtZvSn3eU6upoR6-
-           rIXjZwk&usqp=CAU" style="height:200px;">
+           rIXjZwk&usqp=CAU" style="height:200px;margin-right:30px;"  onclick=process2();>
             
-           <input type="radio" name=opt id=q3 value="scissor">
-           <image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa5TaN_shjWHbQvO7kRysJje4mWP6Tt-Ihbg&usqp=CAU" style="height:200px;">
+           <!-- <input type="radio" name=opt id=q3 value="scissor"> -->
+           <image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa5TaN_shjWHbQvO7kRysJje4mWP6Tt-Ihbg&usqp=CAU" style="height:200px;"  onclick=process3();>
             <br><br></center>
           
-      <pre>
-         <center> <input type="button" style="background-color:black;color:white;padding:15px;border-radius:15px;" value="SUBMIT TEST" onclick="process();">
-         </center></pre>
+      <!-- <pre>
+         <center> <input type="button" style="background-color:black;color:white;padding:15px;border-radius:15px;" value="SUBMIT" onclick="process();">
+         </center></pre> -->
     </form>
   </div>
   
